@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { hashPassword } from "../utils/password";
+import { hashPassword } from "../utils/password.js";
 
 // userSchema
 const userSchema = new mongoose.Schema({
@@ -16,17 +16,17 @@ const userSchema = new mongoose.Schema({
     password:{
         type:String,
         required:true,
-        maxlength:20
+        maxlength:20,
+        minlength:8
     }
 },{timestamps:true})
 
 // hash the password before saving to the database
-userSchema.pre('save',async function(next){
+userSchema.pre('save',async function(nxt){
 
-    if(!this.isModified(this.password)) return next();
+    if(!this.isModified('password')) return;
 
     this.password = await hashPassword(this.password)
-    next();
 })
 
 const User = mongoose.model('User',userSchema);

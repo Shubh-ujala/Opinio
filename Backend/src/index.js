@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors'
-import { connectDB } from './db/db.js';
+import authRouter from './routes/auth.route.js'
 
 export function expressServer(){
     const app = express();
@@ -12,6 +12,8 @@ export function expressServer(){
             healthy : true
         })
     })
+
+    app.use('/api/auth', authRouter)
    
 
     // TODO
