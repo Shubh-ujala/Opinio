@@ -1,6 +1,8 @@
 import express from 'express';
 import cors from 'cors'
 import authRouter from './routes/auth.route.js'
+import pollRouter from './routes/polls.route.js'
+import responseRoute from './routes/responses.route.js'
 
 export function expressServer(){
     const app = express();
@@ -14,6 +16,8 @@ export function expressServer(){
     })
 
     app.use('/api/auth', authRouter)
+    app.use('/api/polls',pollRouter)
+    app.use('/api/responses', responseRoute)
    
 
     // TODO

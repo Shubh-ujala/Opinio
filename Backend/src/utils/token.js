@@ -6,5 +6,6 @@ export function signToken (data){
 }
 
 export function verifyToken(token){
-    return jwt.verify(token,process.env.JWT_SECRET)
+   const decodedPayload = jwt.verify(token,process.env.JWT_SECRET)
+   return decodedPayload;
 }
