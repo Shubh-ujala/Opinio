@@ -125,14 +125,8 @@ poll-Application/
 
 ## 📄 License
 
-This project is licensed under the ISC License.
+This project is licensed under the ISC License
 
 ---
 
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/Shubh-ujala/Opinio/issues).
-
----
-
-Developed with ❤️ by [Shubham](https://github.com/Shubh-ujala)
+Developed with ❤️ by [Shubh](https://github.com/Shubh-ujala)
