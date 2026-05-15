@@ -1,5 +1,4 @@
 import mongoose from "mongoose"
-import { User } from "./user.js"
 
 const optionSchema = new mongoose.Schema({
     text : {
@@ -20,8 +19,8 @@ const questionSchema = new mongoose.Schema({
 })
 const pollSchema = new mongoose.Schema({
     creatorId : {
-        type: mongoose.Schema.ObjectId,
-        ref:User,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         required:true
     },
     title:{

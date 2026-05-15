@@ -73,8 +73,12 @@ router.post("/:pollId", async (req, res) => {
     });
 
     // Emit real-time update
+    const io = req.app.get("io");
+    if (io) {
+      const responsesCount = await Response.countDocuments({ pollId: poll._id });
+      io.to(`poll-${poll._id.toString()}`).emit("poll:update", { totalResponses: responsesCount });
+    }
     
-
     res.status(201).json({ message: "Response submitted successfully", response });
   } catch (error) {
     res.status(500).json({

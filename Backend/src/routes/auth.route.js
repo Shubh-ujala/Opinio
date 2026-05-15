@@ -58,23 +58,23 @@ router.post('/login',async (req,res)=>{
         const {email,password} = req.body;
         const user = await User.findOne({email});
         if(!user){
-            res.status(400).json({
+            return res.status(400).json({
                 error:{
                     message:"user doesn't exist"
                 }
             })
         }
         const hashedPass = user.password;
-        const passwordCheck = comparePassword(password,hashedPass);
+        const passwordCheck = await comparePassword(password,hashedPass);
         if(!passwordCheck){
-            res.status(400).json({
+            return res.status(400).json({
                 error:{
                     message:"Invalid credentials"
                 }
             })
         }
         const token = signToken(user)
-        res.status(201).json({
+        return res.status(200).json({
             message:'Login successfull!',
             token
         })

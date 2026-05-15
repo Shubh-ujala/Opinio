@@ -134,10 +134,13 @@ router.post("/:id/publish", authMiddleware, async (req, res) => {
       });
     }
 
-    ((poll.isPublished = true), (poll.status = "closed"));
+    poll.isPublished = true;
+    poll.status = "active";
     await poll.save();
 
     //notify all the user via socket about the poll publishment
+    const io = req.app.get('io')
+    io.to(`poll-${poll._id}`).emit('poll:published')
 
     res.status(201).json({
       message: "Poll published successfully",

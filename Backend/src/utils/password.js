@@ -5,7 +5,7 @@ export async function hashPassword(pass){
     const plain = pass;
     const salt = 10
 
-    const hashed = bcrypt.hash(pass,salt);
+    const hashed = await bcrypt.hash(pass,salt);
     return hashed;
 }
 
