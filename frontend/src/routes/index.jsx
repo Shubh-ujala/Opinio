@@ -359,7 +359,7 @@ function InteractiveDemo() {
         <div style={{ display: 'flex', gap: '8px' }}>
           <input
             readOnly
-            value="opinio.app/poll/x8b2"
+            value="fe-opinio.vercel.app/poll/x8b2"
             style={{
               flex: 1,
               padding: '10px 12px',
