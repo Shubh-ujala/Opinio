@@ -9,7 +9,7 @@ Opinio is a modern, high-performance polling application designed to make feedba
 ## 🚀 Deployed Links
 
 - **Frontend:** [https://fe-opinio.vercel.app](https://fe-opinio.vercel.app)
-- **Backend API:** [https://opinio-backend.onrender.com](https://opinio-backend.onrender.com) *(Update with your actual backend URL)*
+- **Backend API:** [https://opinio-backend.onrender.com](https://opinio-44s8.onrender.com/) 
 
 ---
 
