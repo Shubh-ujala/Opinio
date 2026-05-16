@@ -24,7 +24,7 @@ function AppLoader() {
         animation: 'logoFadeIn 0.5s ease',
       }}>Opinio</div>
 
-      {/* Spinner ring */}
+
       <div style={{
         width: '52px',
         height: '52px',
@@ -34,7 +34,7 @@ function AppLoader() {
         animation: 'appSpin 0.85s linear infinite',
       }} />
 
-      {/* Bouncing dots */}
+
       <div style={{ display: 'flex', gap: '7px' }}>
         {[0, 200, 400].map((delay, i) => (
           <div key={i} style={{
@@ -88,7 +88,7 @@ function RootLayout() {
     setTheme(prev => prev === 'light' ? 'dark' : 'light')
   }
 
-  // Run once when app loads — checks token
+
   useEffect(() => {
     initAuth()
   }, [])
