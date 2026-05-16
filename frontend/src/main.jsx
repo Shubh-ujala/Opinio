@@ -21,4 +21,10 @@ if (!rootElement.innerHTML) {
       <RouterProvider router={router} />
     </StrictMode>,
   )
+  // Fade out the HTML-level loader once React has mounted
+  const appLoader = document.getElementById('app-loader')
+  if (appLoader) {
+    appLoader.classList.add('hidden')
+    appLoader.addEventListener('transitionend', () => appLoader.remove(), { once: true })
+  }
 }

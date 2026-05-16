@@ -1,13 +1,172 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>frontend</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Opinio – Create & Share Polls</title>
+  <style>
+    #app-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      background: #fffdfa;
+      transition: opacity 0.45s ease, visibility 0.45s ease;
+    }
+
+    #app-loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    /* Detect dark-mode preference before React loads */
+    @media (prefers-color-scheme: dark) {
+      #app-loader {
+        background: #1c140f;
+      }
+
+      .loader-logo {
+        color: #f97316 !important;
+      }
+
+      .loader-ring {
+        border-color: rgba(249, 115, 22, 0.15) !important;
+        border-top-color: #f97316 !important;
+      }
+
+      .loader-dots span {
+        background: #f97316 !important;
+      }
+
+      .loader-text {
+        color: #d6c4b8 !important;
+      }
+    }
+
+    /* Use stored theme if available */
+    .loader-logo {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #d2691e;
+      letter-spacing: -0.5px;
+      animation: logoFadeIn 0.5s ease;
+    }
+
+    .loader-ring {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 3px solid rgba(210, 105, 30, 0.15);
+      border-top-color: #d2691e;
+      animation: spin 0.85s linear infinite;
+    }
+
+    .loader-dots {
+      display: flex;
+      gap: 7px;
+    }
+
+    .loader-dots span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #d2691e;
+      animation: bounce 1.2s ease-in-out infinite;
+    }
+
+    .loader-dots span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .loader-dots span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    .loader-text {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 0.85rem;
+      color: #5c4b41;
+      opacity: 0.7;
+      letter-spacing: 0.4px;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes bounce {
+
+      0%,
+      80%,
+      100% {
+        transform: scale(0.6);
+        opacity: 0.5;
+      }
+
+      40% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes logoFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+  <script>
+    /* Sync loader bg with stored theme instantly */
+    (function () {
+      var t = localStorage.getItem('theme');
+      var el = document.getElementById ? null : null; /* will run after DOM */
+      if (t === 'dark') {
+        document.addEventListener('DOMContentLoaded', function () {
+          var loader = document.getElementById('app-loader');
+          if (loader) {
+            loader.style.background = '#1c140f';
+            var logo = loader.querySelector('.loader-logo');
+            var ring = loader.querySelector('.loader-ring');
+            var dots = loader.querySelectorAll('.loader-dots span');
+            var text = loader.querySelector('.loader-text');
+            if (logo) logo.style.color = '#f97316';
+            if (ring) { ring.style.borderColor = 'rgba(249,115,22,0.15)'; ring.style.borderTopColor = '#f97316'; }
+            dots.forEach(function (d) { d.style.background = '#f97316'; });
+            if (text) text.style.color = '#d6c4b8';
+          }
+        });
+      }
+    })();
+  </script>
+</head>
+
+<body>
+  <!-- App-level loader: visible before React boots -->
+  <div id="app-loader">
+    <div class="loader-logo">Opinio</div>
+    <!-- <div class="loader-ring"></div> -->
+    <div class="loader-dots">
+      <span></span><span></span><span></span>
+    </div>
+    <p>Loading your polls</p>
+  </div>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
 </html>

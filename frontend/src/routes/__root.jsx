@@ -2,6 +2,75 @@ import { createRootRoute, Outlet, Link, useNavigate } from '@tanstack/react-rout
 import { useEffect, useState } from 'react'
 import useAuthStore from '../store/authStore'
 
+function AppLoader() {
+  return (
+    <div style={{
+      position: 'fixed',
+      inset: 0,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '20px',
+      background: 'var(--bg)',
+      zIndex: 9998,
+    }}>
+      <div style={{
+        fontFamily: "'Inter', system-ui, sans-serif",
+        fontSize: '2rem',
+        fontWeight: 700,
+        color: 'var(--accent)',
+        letterSpacing: '-0.5px',
+        animation: 'logoFadeIn 0.5s ease',
+      }}>Opinio</div>
+
+      {/* Spinner ring */}
+      <div style={{
+        width: '52px',
+        height: '52px',
+        borderRadius: '50%',
+        border: '3px solid var(--accent-bg)',
+        borderTopColor: 'var(--accent)',
+        animation: 'appSpin 0.85s linear infinite',
+      }} />
+
+      {/* Bouncing dots */}
+      <div style={{ display: 'flex', gap: '7px' }}>
+        {[0, 200, 400].map((delay, i) => (
+          <div key={i} style={{
+            width: '8px',
+            height: '8px',
+            borderRadius: '50%',
+            background: 'var(--accent)',
+            animation: `appBounce 1.2s ease-in-out ${delay}ms infinite`,
+          }} />
+        ))}
+      </div>
+
+      <p style={{
+        fontFamily: "'Inter', system-ui, sans-serif",
+        fontSize: '0.85rem',
+        color: 'var(--text)',
+        opacity: 0.7,
+        letterSpacing: '0.4px',
+        margin: 0,
+      }}>Loading your polls…</p>
+
+      <style>{`
+        @keyframes appSpin   { to { transform: rotate(360deg); } }
+        @keyframes appBounce {
+          0%, 80%, 100% { transform: scale(0.6); opacity: 0.5; }
+          40%           { transform: scale(1);   opacity: 1;   }
+        }
+        @keyframes logoFadeIn {
+          from { opacity: 0; transform: translateY(-8px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
+    </div>
+  )
+}
+
 function RootLayout() {
   const { user, loading, logout, initAuth } = useAuthStore()
   const navigate = useNavigate()
@@ -29,7 +98,7 @@ function RootLayout() {
     navigate({ to: '/login' })
   }
 
-  if (loading) return <div>Loading...</div>
+  if (loading) return <AppLoader />
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', width: '100%' }}>
